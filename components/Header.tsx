@@ -9,6 +9,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { ThemeToggle } from "./ThemeToggle";
+import { SearchBox } from "./SearchBox";
 
 export function Header() {
   return (
@@ -28,7 +29,10 @@ export function Header() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        <ThemeToggle />
+        <div className="flex items-center gap-4">
+          <SearchBox />
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );
