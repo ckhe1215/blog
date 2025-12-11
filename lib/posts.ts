@@ -68,3 +68,20 @@ export function getPostsByTag(tag: string): Post[] {
   const posts = getAllPosts();
   return posts.filter((post) => post.frontmatter.tags.includes(tag));
 }
+
+export function searchPosts(query: string): Post[] {
+  if (!query.trim()) {
+    return [];
+  }
+
+  const posts = getAllPosts();
+  const lowerQuery = query.toLowerCase();
+
+  return posts.filter((post) => {
+    const titleMatch = post.frontmatter.title.toLowerCase().includes(lowerQuery);
+    const contentMatch = post.content.toLowerCase().includes(lowerQuery);
+    const descriptionMatch = post.frontmatter.description?.toLowerCase().includes(lowerQuery);
+
+    return titleMatch || contentMatch || descriptionMatch;
+  });
+}
