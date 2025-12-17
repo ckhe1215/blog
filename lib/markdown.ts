@@ -2,7 +2,6 @@ import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
-import rehypeSanitize from "rehype-sanitize";
 import { createHighlighter, type Highlighter } from "shiki";
 
 let highlighter: Highlighter | null = null;
@@ -24,6 +23,7 @@ async function getHighlighter() {
         "python",
         "rust",
         "go",
+        "yaml",
       ],
     });
   }
@@ -44,13 +44,19 @@ export async function markdownToHtml(markdown: string): Promise<string> {
     const code = match[2].trimEnd();
 
     try {
-      const highlighted = hl.codeToHtml(code, {
+      let highlighted = hl.codeToHtml(code, {
         lang: lang,
         themes: {
           light: "github-light",
           dark: "github-dark",
         },
+        defaultColor: false,
       });
+      // pre 태그의 인라인 style 속성 제거 (span은 유지)
+      highlighted = highlighted.replace(
+        /<pre([^>]*)\s*style="[^"]*"([^>]*)>/,
+        "<pre$1$2>"
+      );
       processedMarkdown = processedMarkdown.replace(match[0], highlighted);
     } catch {
       // 지원하지 않는 언어인 경우 기본 코드 블록 사용
@@ -68,26 +74,6 @@ export async function markdownToHtml(markdown: string): Promise<string> {
   const result = await unified()
     .use(remarkParse)
     .use(remarkRehype, { allowDangerousHtml: true })
-    .use(rehypeSanitize, {
-      tagNames: [
-        "h1", "h2", "h3", "h4", "h5", "h6",
-        "p", "a", "ul", "ol", "li",
-        "blockquote", "code", "pre",
-        "strong", "em", "del",
-        "table", "thead", "tbody", "tr", "th", "td",
-        "img", "br", "hr",
-        "span", "div",
-      ],
-      attributes: {
-        a: ["href", "title"],
-        img: ["src", "alt", "title"],
-        code: ["className"],
-        pre: ["className", "style"],
-        span: ["className", "style"],
-        div: ["className", "style"],
-        "*": ["className", "style"],
-      },
-    })
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(processedMarkdown);
 

@@ -230,24 +230,28 @@
 }
 
 /* Shiki code block styling */
-.prose .shiki {
+.prose .shiki,
+.prose pre.shiki {
+  background-color: var(--muted) !important;
+  padding: 1rem !important;
+  border-radius: 0.5rem !important;
+  overflow-x: auto;
+  margin: 0;
+}
+
+.prose .shiki code,
+.prose pre.shiki code {
   background-color: transparent !important;
   padding: 0;
 }
 
-.prose pre:has(.shiki) {
-  background-color: var(--muted);
-}
-
 /* Dark mode support for Shiki dual themes */
-html.dark .shiki,
 html.dark .shiki span {
   color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
+  background-color: transparent !important;
 }
 
-html:not(.dark) .shiki,
 html:not(.dark) .shiki span {
   color: var(--shiki-light) !important;
-  background-color: var(--shiki-light-bg) !important;
+  background-color: transparent !important;
 }
