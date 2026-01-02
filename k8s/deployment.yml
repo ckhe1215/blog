@@ -18,7 +18,7 @@ spec:
         - name: ecr-secret
       containers:
         - name: blog
-          image: 727494188945.dkr.ecr.ap-southeast-2.amazonaws.com/blog:v1.0.0
+          image: 727494188945.dkr.ecr.ap-southeast-2.amazonaws.com/blog:ea1d6d64c60c976c2997e8284efc1534077a9fa1
           ports:
             - containerPort: 3000
           env:
