@@ -16,7 +16,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: blog
-          image: 727494188945.dkr.ecr.ap-southeast-2.amazonaws.com/blog:0d6d53fc3a3bb02f545982ef0fc0abfcb676f1e3
+          image: 727494188945.dkr.ecr.ap-southeast-2.amazonaws.com/blog:40550b6e7b5d3e8234206346545b623f63b6221c
           ports:
             - containerPort: 3000
           env:
