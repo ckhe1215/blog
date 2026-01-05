@@ -130,7 +130,6 @@
   --tw-prose-code: var(--foreground);
   --tw-prose-pre-bg: var(--muted);
   color: var(--tw-prose-body);
-  max-width: 65ch;
   line-height: 1.75;
 }
 
