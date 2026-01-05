@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Blog",
+    default: "Blog | Haeun Kim",
     template: "%s | Blog",
   },
   description: "개발과 기술에 대한 이야기를 나눕니다.",
