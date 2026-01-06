@@ -28,7 +28,7 @@ export function PostCard({ post }: PostCardProps) {
 
   return (
     <Link href={`/${post.slug}`}>
-      <Card className="hover:shadow-lg transition-shadow cursor-pointer h-[200px] flex flex-col">
+      <Card className="hover:shadow-lg transition-shadow cursor-pointer h-[220px] flex flex-col">
         <CardHeader>
           <CardTitle className="hover:text-primary transition-colors line-clamp-2">
             {post.frontmatter.title}
